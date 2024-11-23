@@ -1,0 +1,1 @@
+# aulaplanner-app
