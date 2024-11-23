@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="https://img.icons8.com/?size=200&id=kiEmoGfIZVHu&format=png&color=61806c">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+    <div class="divcredits">
+        <label class="credits">¡¡¡ Powered by Luis Angel Rocha Ronquillo & Miguel Angel Calderón Romero !!! 
+        </label>
+    </div>
+    <br>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/filogo.png') }}" alt="Logo">
+        </div>
+        <h1>AULA PLANNER <span class="beta">EXPERIMENTAL</span></h1>
+        
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Logo_de_la_UAEMex.svg" alt="Logo 2">
+        </div>
+    </header>
+    <br>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="clases">Archivo de Clases: <button class="help-button" onclick="openHelpClasses()">?</button></label>
+
+        <div class="btn-file">
+            <label class="custom-file-upload">
+                <input type="file" id="clases" name="clases" required onchange="updateFileName(this, 'clasesFileName')">
+                <span id="clasesFileName"> Seleccionar archivo</span>
+            </label>
+        </div>
+        
+        <label for="salones">Archivo de Salones: <button class="help-button" onclick="openHelpRooms()">?</button> </label>
+
+        <div class="btn-file">
+            <label class="custom-file-upload">
+                <input type="file" id="salones" name="salones" required onchange="updateFileName(this, 'salonesFileName')">
+                <span id="salonesFileName"> Seleccionar archivo</span>
+            </label>
+        </div>
+        <br>
+        <div class="btn-gen">
+            <input type="submit" value="Generar">
+        </div>    
+    </form>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <p id="modalMessage">Generando asignaciones...</p>
+            <button id="downloadBtn" class="btn-download" onclick="downloadFile()">Descargar CSV</button>
+            <button id="downloadBtnPDF" class="btn-download" onclick="downloadFilePDF()">Descargar PDF</button>
+        </div>
+    </div>
+
+    <div id="helpModalClasses" class="help-classes">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModalClasses()">&times;</span>
+            <h2>Estructura del archivo de Clases</h2>
+            <p>
+                El archivo de clases debe tener la siguiente estructura:
+                <ul>
+                    <li>NOMBRECLASE</li>
+                    <li>GRUPO</li>
+                </ul>
+
+            </p>
+        </div>
+    </div>
+
+    <div id="helpModalRooms" class="help-rooms">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModalRooms()">&times;</span>
+            <h2>Estructura del archivo de Salones</h2>
+            <p>
+                El archivo de salones debe tener la siguiente estructura:
+                <ul>
+                    <li>SALON</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <label class="foot-credits"> Versión 1.0.0 </label>
+        <div>
+            <a href="static/legal/terminos.pdf" class="terminos-cond">Términos y Condiciones</a>
+            <a href="static/legal/privacidad.pdf" class="terminos-cond">Aviso de privacidad</a>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial</title>
+</head>
+<body>
+    <h1>Historial de Archivos</h1>
+    <table>
+        <tr>
+            <th>Archivo</th>
+            <th>Fecha de Creación</th>
+        </tr>
+        {% for record in records %}
+        <tr>
+            <td><a href="{{ url_for('download_file', file_path=record.file_path) }}">Descargar</a></td>
+            <td>{{ record.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
+</body>
+</html>
